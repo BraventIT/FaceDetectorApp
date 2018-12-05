@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<local:BaseView x:Class="FaceDetectFormsDemo.GroupDetailView"
+                xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                xmlns:local="clr-namespace:FaceDetectFormsDemo"
+                Title="{Binding Title}" 
+                PaddingBaseView="0"
+                x:Name="root">
+    <local:BaseView.ToolbarItems>
+        <ToolbarItem Icon="ic_identify" Command="{Binding IdentifyPersonsOnPhotoCommand}"/>
+        <ToolbarItem Icon="ic_statistics" Command="{Binding StatisticsCommand}"/>
+    </local:BaseView.ToolbarItems>
+    <local:BaseView.ContentChild>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Margin="30,0"
+                   HorizontalTextAlignment="Center"
+                   Text="Todavía no hay personas añadidas a este grupo"
+                   VerticalTextAlignment="Center" />
+            <local:CustomListView Grid.Row="0"
+                                  BackgroundColor="White"
+                                  IsVisible="{Binding Persons,
+                                                      Converter={StaticResource ListContentToVisibilityConverter}}"
+                                  ItemsSource="{Binding Persons}"
+                                  HasUnevenRows="true"
+                                  SeparatorVisibility="None">
+                <x:Arguments>
+                    <ListViewCachingStrategy></ListViewCachingStrategy>
+                </x:Arguments>
+                <local:CustomListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="0" Padding="15,0" RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="1" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ffimage:CachedImage Grid.Row="1" 
+                                                     Grid.Column="0" 
+                                                     DownsampleToViewSize="true"
+                                                     Source="{Binding FaceImageUrl}" 
+                                                     HeightRequest="100"/>
+                                <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       VerticalTextAlignment="Center"
+                                       Text="{Binding Name}" />
+                                <BoxView Grid.Row="3"
+                                         Grid.Column="0"
+                                         Grid.ColumnSpan="3"
+                                         HeightRequest="1"
+                                         HorizontalOptions="Fill"
+                                         BackgroundColor="Silver" />
+                                
+                                <Button Image="delete" 
+                                        WidthRequest="50"
+                                        Grid.Row="0"
+                                        BackgroundColor="Transparent"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Center"
+                                        Grid.RowSpan="4" 
+                                        Grid.Column="2" 
+                                        Command="{Binding BindingContext.DeletePersonCommand, Source={x:Reference root}}"
+                                        CommandParameter="{Binding }"/>
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </local:CustomListView.ItemTemplate>
+            </local:CustomListView>
+
+            <Button Grid.Row="0" 
+                    Margin="15"
+                    VerticalOptions="End"
+                    BackgroundColor="#CED345"
+                    Command="{Binding AddPersonCommand}"
+                    Text="Añadir persona"
+                    TextColor="White" />
+        </Grid>
+    </local:BaseView.ContentChild>
+</local:BaseView>

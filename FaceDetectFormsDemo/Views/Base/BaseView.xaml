@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage x:Class="FaceDetectFormsDemo.BaseView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="root">
+    <Grid Margin="0"
+         Padding="0"
+          ColumnSpacing="0"
+          RowSpacing="0">
+        <ContentView x:Name="ChildContentContainer"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand" 
+                     BackgroundColor="White"
+                     Padding="{Binding PaddingBaseView, Source={x:Reference root}}"/>
+        <StackLayout HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand"
+                     BackgroundColor="Black"
+                     Opacity="0.68"
+                     IsVisible="{Binding IsBusy}"
+                     Orientation="Vertical">
+            <ActivityIndicator HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               IsRunning="{Binding IsBusy}"
+                               Color="White" />
+            <Label Margin="30"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   Text="{Binding BusyText}"
+                   TextColor="White" />
+        </StackLayout>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<local:BaseView x:Class="FaceDetectFormsDemo.StatisticsView"
+                xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                xmlns:local="clr-namespace:FaceDetectFormsDemo"
+                PaddingBaseView="0,15"
+                Title="Estadísticas">
+    <local:BaseView.ContentChild>
+        <Grid RowSpacing="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <Label Grid.Row="0" 
+                   Margin="15,0" 
+                   Text="{Binding EmotionText}" />
+            
+            <Label Grid.Row="0"
+                   Margin="15,0"
+                   IsVisible="{Binding HasToShowPicker}"
+                   Text="Si quieres ver qué personas del grupo se parecen a ti, dinos quién eres:" />
+            
+            <Label Grid.Row="1" 
+                   Margin="15,0"
+                   Text="{Binding AgeText}" />
+            
+            <Picker x:Name="picker"
+                    Grid.Row="1"
+                    Margin="15,0"
+                    IsVisible="{Binding HasToShowPicker}"
+                    ItemDisplayBinding="{Binding Name}"
+                    ItemsSource="{Binding Persons}"
+                    SelectedItem="{Binding PersonSelected}"
+                    Unfocused="Handle_Unfocused" />
+            
+            <Label Grid.Row="2" 
+                   Text="{Binding GenderText}"
+                   Margin="15,0"/>
+            
+            <local:CustomListView Grid.Row="3"
+                                  BackgroundColor="White"
+                                  HasUnevenRows="true"
+                                  IsVisible="{Binding Persons,
+                                                      Converter={StaticResource ListContentToVisibilityConverter}}"
+                                  ItemsSource="{Binding SimilarPersons}"
+                                  SeparatorVisibility="None">
+                <local:CustomListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="0"
+                                  Padding="15,0"
+                                  RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="1" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <ffimage:CachedImage Grid.Row="1"
+                                                     Grid.RowSpan="3"
+                                                     Grid.Column="0"
+                                                     HeightRequest="100"
+                                                     Source="{Binding FaceImageUrl}" />
+                                <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       Text="{Binding Name}"
+                                       VerticalTextAlignment="Center" />
+                                <Label Grid.Row="3"
+                                       Grid.Column="1"
+                                       Text="{Binding ConfidenceSimilarity, Converter={StaticResource DecimalToPercentageTextConverter}}"
+                                       VerticalTextAlignment="Center" />
+                                <BoxView Grid.Row="5"
+                                         Grid.Column="0"
+                                         Grid.ColumnSpan="2"
+                                         HeightRequest="1"
+                                         HorizontalOptions="Fill"
+                                         BackgroundColor="Silver" />
+
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </local:CustomListView.ItemTemplate>
+            </local:CustomListView>
+
+        </Grid>
+    </local:BaseView.ContentChild>
+</local:BaseView>

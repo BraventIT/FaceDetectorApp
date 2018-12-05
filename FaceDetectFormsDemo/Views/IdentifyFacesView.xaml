@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<local:BaseView x:Class="FaceDetectFormsDemo.IdentifyFacesView"
+                xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:local="clr-namespace:FaceDetectFormsDemo"
+                Title="Identificador">
+    <local:BaseView.ContentChild>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Image 
+                   Grid.Row="0"
+                   Aspect="AspectFit"
+                   Source="{Binding PhotoTaked}" />
+            <local:CustomListView Grid.Row="1" IsVisible="{Binding FacesDetected,
+                                                      Converter={StaticResource ListContentToVisibilityConverter}}"
+                                  ItemsSource="{Binding FacesDetected}"
+                                  SeparatorVisibility="None"
+                                  HasUnevenRows="true">
+                <local:CustomListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="1" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="1" Text="{Binding PersonName}" />
+                                <Label Grid.Row="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding FaceAttributes.Age}" />
+                                            <Span Text=" años"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Grid.Row="3" Text="{Binding FaceAttributes.Emotion, Converter={StaticResource EmotionToTextConverter}}" />
+                                
+                                <BoxView Grid.Row="5"
+                                         HorizontalOptions="FillAndExpand"
+                                         BackgroundColor="Silver" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </local:CustomListView.ItemTemplate>
+                
+            </local:CustomListView>
+            <Button Grid.Row="2" Command="{Binding AddImageCommnad}" Text="Añadir imagen" BackgroundColor="#ced345" TextColor="White"/>
+        </Grid>
+    </local:BaseView.ContentChild>
+</local:BaseView>

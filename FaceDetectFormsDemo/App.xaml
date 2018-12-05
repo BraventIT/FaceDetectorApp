@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="FaceDetectFormsDemo.App"
+             xmlns:cv="clr-namespace:FaceDetectFormsDemo.Converters">
+    <Application.Resources>
+        <ResourceDictionary >
+
+            <!--  CONVERTERS  -->
+            <cv:ListContentToVisibilityConverter x:Key="ListContentToVisibilityConverter" />
+            <cv:EmotionToTextConverter x:Key="EmotionToTextConverter"/>
+            <cv:DecimalToPercentageTextConverter x:Key="DecimalToPercentageTextConverter"/>
+            
+            
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

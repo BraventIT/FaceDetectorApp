@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:BaseView x:Class="FaceDetectFormsDemo.MainPage"
+                xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:local="clr-namespace:FaceDetectFormsDemo"
+                Title="Face Detector">
+    <local:BaseView.ContentChild>
+        <Grid Padding="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <local:CustomListView Grid.Row="0"
+                                  Command="{Binding GroupSelectedCommand}"
+                                  ItemsSource="{Binding Groups}"
+                                  HasUnevenRows="true"
+                                  SeparatorVisibility="None">
+                <local:CustomListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="0" Padding="0" RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="1" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="1" Text="{Binding Name}" />
+                                <BoxView Grid.Row="3"
+                                         HorizontalOptions="FillAndExpand"
+                                         BackgroundColor="Silver" />
+                            </Grid>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </local:CustomListView.ItemTemplate>
+            </local:CustomListView>
+        </Grid>
+    </local:BaseView.ContentChild>
+</local:BaseView>

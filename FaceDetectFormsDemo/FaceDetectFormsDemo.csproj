@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+    <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
+    <PackageReference Include="Microsoft.Azure.Mobile.Client.SQLiteStore" Version="4.0.2" />
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
+    <PackageReference Include="WindowsAzure.Storage" Version="9.3.2" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.4.859" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="CustomControls\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\Base\" />
+    <Folder Include="Services\Face\" />
+    <Folder Include="Models\" />
+    <Folder Include="Converters\" />
+    <Folder Include="ViewModels\Base\" />
+    <Folder Include="Views\Base\" />
+    <Folder Include="Services\Data\" />
+    <Folder Include="Constants\" />
+    <Folder Include="Models\FacesLargeList\" />
+    <Folder Include="Models\PersonGroup\" />
+    <Folder Include="Models\Group\" />
+    <Folder Include="Models\Similar\" />
+    <Folder Include="Models\Identify\" />
+    <Folder Include="Models\Detect\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="CustomControls\CameraContentPage.cs" />
+    <Compile Remove="Views\CameraView.xaml.cs" />
+    <Compile Remove="Models\Data\FaceImage.cs" />
+    <Compile Remove="Constants\DatabaseConstants.cs" />
+    <Compile Remove="Services\Data\FaceImageDataService.cs" />
+    <Compile Remove="Services\Data\IFaceImageDataService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\CameraView.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Converters\InverseBoolVisibilityConverter.xml" />
+  </ItemGroup>
+</Project>
